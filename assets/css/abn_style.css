@@ -1,0 +1,211 @@
+#ModalPersonnalisation, #maxLengthCount {
+    display: none;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(12px);
+    -ms-transform: translateX(12px);
+    transform: translateX(12px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+#ModalPersonnalisation {
+    height: -webkit-fill-available;
+    width: 50%;
+    position: fixed;
+    z-index: 1050;
+    top: 0;
+    right: 0;
+    background-color: #FFF;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 1px 1px 6px #b4b4b4;
+}
+#personnalisationModal {
+    padding: 0px 50px;
+}
+#abnUserName{
+    /*width: 60%;*/
+    padding: 8px;
+    margin-bottom: 15px;
+    margin-top: 8px;
+    border-radius: 5px;
+    border: 1px solid #919191;
+}
+#abnUserName:focus{ 
+    border: 1px solid #919191;
+    outline: none;
+}
+#abnConfirmNameBtn{
+    padding: 10px 30px;
+    color: #000;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    width: fit-content;
+    margin-bottom: 20px;
+}
+#abnValidateNameBtn {
+    padding: 9px 15px;
+    color: #000;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+}
+.abn-letter-label {
+    background-color: #000;
+    color: #FFF;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 5px 12px;
+}
+.abn-button-info {
+    position: fixed;
+    bottom: 10px;
+    width: -webkit-fill-available;
+    display: flex;
+    justify-content: center;
+}
+.abn-letter-group {
+    display: flex;
+    align-items: baseline;
+}
+.search-filter-info{
+    display: flex; 
+    flex-direction: column;
+    position: relative;
+}
+.abn-hobbies-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.abn-custom-radio{
+    display: flex;
+   align-items: center;
+    background-color: #FFF;
+    box-shadow: 1px 1px 10px #ededed;
+    height: auto;
+    padding: 0px 20px;
+    margin-left: 10px;
+    border-radius: 10px;
+    gap: 0;
+    width: auto;
+    margin-bottom: 15px;
+    width: max-content;
+}
+.abn-hobbies-icon p {
+    margin-bottom: 0rem;
+    font-size: 14px;
+}
+.abn-custom-radio input:focus {
+   outline: none;
+}
+.abn-radio-buttons{
+    margin-bottom: 10px;
+}
+.abn-letter-group:focus {
+    outline: none;
+}
+#maxLengthCount {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+.abn-hobbies-icon img {
+    box-shadow: none !important;
+    width: 40px;
+    height: 50px !important;
+    object-fit: contain;
+}
+#animal-by-name-list {
+    height: 15rem;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+@media  (max-width: 768px) {
+  #ModalPersonnalisation {
+      width: 70%;  
+      height:100%;
+    }
+    #animal-by-name-list {
+        height: 40vh;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+      abn-button-info {
+       width: auto;
+    }
+}
+
+@media  (max-width: 600px) {
+  #ModalPersonnalisation {
+      width: 100%;  
+      height:100%;
+    }
+    .abn-custom-radio {
+            width: 100%;
+    }
+    #animal-by-name-list {
+        height: 40vh;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+    .abn-button-info {
+       width: auto;
+    }
+}
