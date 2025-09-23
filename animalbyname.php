@@ -1,63 +1,71 @@
 <?php
-/* 
-Plugin Name: Animal By Name
-Description: A WordPress plugin to add animal pictures by customer name in woocommerce.
-Version: 1.0
-Author: Ali
-echo '<pre>';print_r($post_id);'</pre>';die;
+/*
+ * Plugin Name: Animal By Name
+ * Description: A WordPress plugin to add animal pictures by customer name in WooCommerce.
+ * Version: 1.0
+ * Author:            Muhammad Aqib Shahzad
+ * Author URI:        https://muhammadaqibshahzad.com/
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
 */
 
 if (!defined('ABSPATH')) {
-    exit;
+     exit;
 }
 
+/**
+ * Enqueue admin scripts and styles for color picker.
+ *
+ * @since 1.0.0
+ */
 function abn_plugin_admin_scripts() {
-    
-    wp_enqueue_script('wp-color-picker');
-    wp_enqueue_style('wp-color-picker');
-    wp_enqueue_script('chat-genie-script', plugins_url('assets/js/abn-color-picker.js', __FILE__), array('jquery', 'wp-color-picker'), '', true);
-
+     wp_enqueue_script('wp-color-picker');
+     wp_enqueue_style('wp-color-picker');
+     wp_enqueue_script('chat-genie-script', plugins_url('assets/js/abn-color-picker.js', __FILE__), array('jquery', 'wp-color-picker'), '', true);
 }
 add_action('admin_enqueue_scripts', 'abn_plugin_admin_scripts');
 
+/**
+ * Enqueue frontend scripts and styles for plugin functionality.
+ *
+ * @since 1.0.0
+ */
 function abn_plugin_enqueue_scripts() {
-
-    wp_register_style('abn-plugin-style', plugins_url('assets/css/abn_style.css', __FILE__), array(), '1.0.0');
-
-    wp_register_style('abn-swiper-style', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), '11.0.0');
-
-    wp_register_script('abn-swiper-script', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '1.0.0');
-
-    wp_register_script('abn-plugin-script', plugins_url('assets/js/abn_script.js', __FILE__), array(), '1.0.0');
-
-    wp_enqueue_style('abn-plugin-style');
-    wp_enqueue_style('abn-swiper-style');
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('abn-plugin-script');
-    wp_enqueue_script('abn-swiper-script');
-
-    wp_localize_script('abn-plugin-script', 'ajax_object', array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'plugin_url' => plugins_url(),
-        'nonce' => wp_create_nonce('my_ajax_nonce')
-    ));
-
-    include_once plugin_dir_path(__FILE__) . 'assets/dynamic-css/abn-plugin-dynamic-css.php';
+     wp_register_style('abn-plugin-style', plugins_url('assets/css/abn_style.css', __FILE__), array(), '1.0.0');
+     wp_register_style('abn-swiper-style', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), '11.0.0');
+     wp_register_script('abn-swiper-script', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '1.0.0');
+     wp_register_script('abn-plugin-script', plugins_url('assets/js/abn_script.js', __FILE__), array(), '1.0.0');
+     wp_enqueue_style('abn-plugin-style');
+     wp_enqueue_style('abn-swiper-style');
+     wp_enqueue_script('jquery');
+     wp_enqueue_script('abn-plugin-script');
+     wp_enqueue_script('abn-swiper-script');
+     wp_localize_script('abn-plugin-script', 'ajax_object', array(
+          'ajax_url' => admin_url('admin-ajax.php'),
+          'plugin_url' => plugins_url(),
+          'nonce' => wp_create_nonce('my_ajax_nonce')
+     ));
+     include_once plugin_dir_path(__FILE__) . 'assets/dynamic-css/abn-plugin-dynamic-css.php';
 }
 add_action('wp_enqueue_scripts', 'abn_plugin_enqueue_scripts');
 
+/**
+ * Create custom table for storing animal images.
+ *
+ * @global wpdb $wpdb WordPress database abstraction object.
+ * @since 1.0.0
+ */
 function abn_plugin_create_table() {
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'abn_animal_images';
-    $charset_collate = $wpdb->get_charset_collate();
-
-    $sql = "CREATE TABLE $table_name (
-        id mediumint(9) NOT NULL AUTO_INCREMENT,
-        animal_name varchar(255) NOT NULL,
-        animal_image text NOT NULL,
-        created_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-        PRIMARY KEY  (id)
-    ) $charset_collate;";
+     global $wpdb;
+     $table_name = $wpdb->prefix . 'abn_animal_images';
+     $charset_collate = $wpdb->get_charset_collate();
+     $sql = "CREATE TABLE $table_name (
+          id mediumint(9) NOT NULL AUTO_INCREMENT,
+          animal_name varchar(255) NOT NULL,
+          animal_image text NOT NULL,
+          created_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+          PRIMARY KEY  (id)
+     ) $charset_collate;";
 
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
